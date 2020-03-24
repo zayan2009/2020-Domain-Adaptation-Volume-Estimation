@@ -31,3 +31,8 @@
 - LDS: linear distribution shift
 - NLDS: non-linear distribution shift
 
+
+
+> It is possible to improve the generalization by altering the distribution of labels?
+>
+> e.g., turn the label distribution into Gaussian.
