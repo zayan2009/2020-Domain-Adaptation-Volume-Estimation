@@ -221,6 +221,6 @@ with open('../Data/feature_types.json','w') as f:
     json.dump(type_features, f)
 
 # save data
-X.to_csv('../Data/X.csv')
-Y.to_csv('../Data/Y.csv')
+X.to_csv('../Data/X.csv',index=None)
+Y.to_csv('../Data/Y.csv',index=None)
 

@@ -78,12 +78,12 @@ print("[LightGBM] mae: {:.2f} | mape: {:.2f}% | mspe: {:.2f}%".format(
 # In[ ]:
 
 
-gb = GradientBoostingRegressor(n_estimators=10000, learning_rate=0.01,
-                               max_depth=10, subsample=0.8)
-selector = SelectFromModel(estimator=gb,max_features=50)
-selector = selector.fit(X_data, y_data)
-best_features = X_data.columns[np.where(selector.get_support() == True)[0]]
+feat_imp = pd.DataFrame(columns=['feature_name','importance'])
+feat_imp['feature_name'] = X_data.columns
+feat_imp['importance'] = gbm.feature_importance()
+feat_imp = feat_imp.sort_values('importance',ascending=False).reset_index(drop=True)
 
-with open('./best_50_features_gb.json','r') as f:
+best_features = feat_imp.iloc[:50,0].tolist()
+with open('../Data/best_50_features_gb.json','w') as f:
     json.dump(best_features, f)
 print("[Best Features] ",best_features)
