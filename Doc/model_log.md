@@ -1,38 +1,18 @@
-| Method |                            Model                             |  MAE  |  MAPE  |  MSPE  |
-| :----: | :----------------------------------------------------------: | :---: | :----: | :----: |
-|   DT   |                  Linear Regression (cont.)                   | 57.05 | 55.81% | 29.72% |
-|   DT   |                 Linear Regression (one-hot)                  | 38.57 | 35.78% | 14.10% |
-|   DT   |                   Random Forest (200, 15)                    | 58.47 | 51.39% | 27.38% |
-|   DT   |                   Random Forest (300, inf)                   | 57.48 | 48.85% | 26.62% |
-|   DT   |                   Random Forest (500, inf)                   | 57.40 | 48.99% | 26.74% |
-|   DT   |              GBM (5000, 0.02, 10, 90, one-hot)               | 32.69 | 22.27% | 6.92%  |
-|   DT   |                   GBM (5000, 0.02, 10, 90)                   | 32.45 | 22.00% | 6.70%  |
-|   DT   |                  *GBM (10000, 0.01, 8, 100)                  | 31.77 | 21.60% | 6.45%  |
-|   DT   |           GBM (10000, 0.01, 8, 100, bagging-5/0.8)           | 31.50 | 21.44% | 6.34%  |
-|   DT   |          DART (10000, 0.01, 8, 100, bagging-5/0.8)           | 31.01 | 20.43% | 5.95%  |
-|   DT   |          DART (10000, 0.01, 8, 100, bagging-50/0.8)          | 31.11 | 20.39% | 5.94%  |
-|   DT   |    *MLP (4, [256, 128, 64, 32], drop-0.1, 50, 256, 5e-4)     | 25.73 | 17.95% | 4.47%  |
-|   DT   |    MLP (4, [256, 128, 64, 32], drop-0.2, 100, 256, 5e-4)     | 26.86 | 17.92% | 4.67%  |
-|  LDS   |               SVD (90) + *GBM (bagging-50/0.8)               | 23.54 | 21.18% | 5.83%  |
-|  LDS   |              SVD (100) + *GBM (bagging-50/0.8)               | 23.57 | 21.21% | 5.80%  |
-|  LDS   |              SVD (120) + *GBM (bagging-50/0.8)               | 23.78 | 21.39% | 5.87%  |
-|  LDS   |               SVD (100) + $k$-NN (8, weighted)               | 24.24 | 21.80% | 6.69%  |
-|  LDS   |               SVD (100) + $k$-NN (8, uniform)                | 24.58 | 22.11% | 6.89%  |
-|  LDS   |              SVD (100) + $k$-NN (10, weighted)               | 23.93 | 21.53% | 6.58%  |
-|  LDS   |               SVD (100) + $k$-NN (10, uniform)               | 24.35 | 21.91% | 6.84%  |
-|  LDS   |              SVD (100) + $k$-NN (20, weighted)               | 25.20 | 22.67% | 7.35%  |
-|  LDS   |               SVD (100) + $k$-NN (20, uniform)               | 25.91 | 23.31% | 7.79%  |
-|  NLDS  | AE (100, 5, [256, 128], drop-0.1, 20, 32, 1e-4) + $k$-NN (10, weighted) | 61.61 | 55.43% | 32.16% |
-|  NLDS  | AE (100, 5, [256, 128], drop-0.1, 20, 32, 1e-4) + *GBM (bagging-50/0.8) | 60.25 | 54.20% | 31.60% |
-|  NLDS  | AE (100, 5, [128, 256], drop-0.1, 500, 512, 1e-4) + $k$-NN (10, weighted) | 57.47 | 51.70% | 28.77% |
-|  NLDS  | AE (100, 5, [128, 256], drop-0.1, 500, 512, 1e-4) + *GBM (10, 200, bagging-100/0.8) | 48.39 | 43.53% | 21.61% |
+## Baseline
 
-- DT: direct transfer
-- LDS: linear distribution shift
-- NLDS: non-linear distribution shift
+| Method |                     Model                      |  MAE  |  MAPE  |  MSPE  | Time  |
+| :----: | :--------------------------------------------: | :---: | :----: | :----: | :---: |
+|   BL   |               Linear Regression                | 53.66 | 42.99% | 22.67% | 0.896 |
+|   BL   |              Random Forest (100)               | 37.79 | 35.91% | 15.17% | 46.7  |
+|   BL   |            k-Nearest Neighbor (20)             | 36.74 | 33.18% | 13.04% | 11.3  |
+|   BL   | Gradient Boosting Desicion Tree (8, 100, 5000) | 36.82 | 33.20% | 12.96% | 142.3 |
+|   BL   |      Multi-Layer Perceptron (0.5-dropout)      | 34.35 | 36.20% | 13.42% | 99.0  |
+
+## Sample-based method
+
+* feature selection by GBM implicit mini-max game
+* sample weight by logit
+* regress by GBM
 
 
 
-> It is possible to improve the generalization by altering the distribution of labels?
->
-> e.g., turn the label distribution into Gaussian.
