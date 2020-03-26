@@ -14,8 +14,8 @@
 | :----: | :----------------------------------------: | :---: | :----: | :----: | :---: |
 |   SW   | Logit weights+GBM regressor (all features) | 34.04 | 31.38% | 10.98% | 31.40 |
 |   SW   |  MLP weights+GBM regressor (all features)  | 36.04 | 33.29% | 12.53% | 28.72 |
-|   SW   | Logit weights+MLP regressor (all features) | 36.99 | 35.41% | 14.19% | 162.3 |
-|   SW   |  MLP weights+MLP regressor (all features)  |       |        |        |       |
+|   SW   | Logit weights+MLP regressor (all features) | 32.17 | 31.98% | 10.83% | 936.3 |
+|   SW   |  MLP weights+MLP regressor (all features)  | 33.54 | 34.71% | 12.68% | 969.0 |
 
 ## Feature-based method
 
@@ -25,3 +25,5 @@
 |  LDS   | SVD trans.+MLP regressor (all features) |       |        |        |       |
 |  NLDS  | AE trans.+GBM regressor (all features)  |       |        |        |       |
 |  NLDS  | AE trans.+MLP regressor (all features)  |       |        |        |       |
+
+## Advanced method
