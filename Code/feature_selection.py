@@ -49,6 +49,7 @@ y_data = Y['volume']
 
 
 params = {
+<<<<<<< HEAD
     'objective': 'regression',
     'boosting': 'gbdt',
     'metric': 'mae',
@@ -68,6 +69,22 @@ gbm = lgb.train(params, train_data,
                 valid_names=['train'],
                 verbose_eval=500,
                 early_stopping_rounds=100)
+=======
+    'objective':'regression',
+    'boosting':'gbdt',
+    'num_rounds':10000,
+    'learning_rate':0.01,
+    'max_depth':8,
+    'num_leaves':100,
+    'bagging_fraction':0.9,
+    'bagging_freq':100,
+    'verbose':2
+}
+
+train_data = lgb.Dataset(X_data, y_data,
+                         categorical_feature=['weekday','interval','holiday','peak'])
+gbm = lgb.train(params, train_data)
+>>>>>>> 579ff9a58d14fb22d2c17be3bb5b35cb901cebd1
 
 
 # In[ ]:

@@ -193,7 +193,11 @@ interval_volume['penetration_p7'] = interval_volume['volume_es_p7'] / interval_v
 interval_volume['penetration_p6'] = interval_volume['volume_es_p6'] / interval_volume['tmp']
 interval_volume['penetration_p5'] = interval_volume['volume_es_p5'] / interval_volume['tmp']
 interval_volume.drop(['tmp','volume','volume_es_p7','volume_es_p5','volume_es_p6'],axis=1,inplace=True)
+<<<<<<< HEAD
 X = pd.merge(X, interval_volume).sort_values(['linkIdx','datetime']).reset_index(drop=True)
+=======
+X = pd.merge(X, interval_volume, on='interval')
+>>>>>>> 579ff9a58d14fb22d2c17be3bb5b35cb901cebd1
 
 # scaled volume
 for up_idx, up_col in enumerate(['volume','volume_es_p7',

@@ -10,9 +10,18 @@
 
 ## Sample-based method
 
-* feature selection by GBM implicit mini-max game
-* sample weight by logit
-* regress by GBM
+| Method |                   Model                    |  MAE  |  MAPE  |  MSPE  | Time  |
+| :----: | :----------------------------------------: | :---: | :----: | :----: | :---: |
+|   SW   | Logit weights+GBM regressor (all features) | 34.04 | 31.38% | 10.98% | 31.40 |
+|   SW   |  MLP weights+GBM regressor (all features)  | 36.04 | 33.29% | 12.53% | 28.72 |
+|   SW   | Logit weights+MLP regressor (all features) | 36.99 | 35.41% | 14.19% | 162.3 |
+|   SW   |  MLP weights+MLP regressor (all features)  |       |        |        |       |
 
+## Feature-based method
 
-
+| Method |                  Model                  |  MAE  |  MAPE  |  MSPE  | Time  |
+| :----: | :-------------------------------------: | :---: | :----: | :----: | :---: |
+|  LDS   | SVD trans.+GBM regressor (all features) | 40.68 | 36.18% | 14.90% | 152.5 |
+|  LDS   | SVD trans.+MLP regressor (all features) |       |        |        |       |
+|  NLDS  | AE trans.+GBM regressor (all features)  |       |        |        |       |
+|  NLDS  | AE trans.+MLP regressor (all features)  |       |        |        |       |

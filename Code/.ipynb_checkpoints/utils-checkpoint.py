@@ -5,7 +5,7 @@
 
 # In[ ]:
 
-import matplotlib.pyplot as plt
+
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import KFold, train_test_split
 import pandas as pd
@@ -26,12 +26,12 @@ def dataset_split(X, Y, split_mode, use_best_features, num_features, use_simple_
 
         X_data = X[best_features[:num_features]]
     
-    elif use_simple_features:
+    elif use_simple_feature:
         simple_features = ['volume', 'volume_es_p6', 'volume_es_p5', 'volume_es_p7',
                            'through', 'left', 'right', 'thr_left',
                            'thr_right', 'u_turn', 'num_lanes',
                            'weekday', 'interval', 'holiday', 'peak']
-        X_data = X.drop(['linkIdx', 'datetime'], axis=1)[simple_features]
+        X_data = X.drop(['linkIdx', 'datetime'], axis=1)[use_features]
     
     else:  # use all features
         X_data = X.drop(['linkIdx', 'datetime'], axis=1)
@@ -113,39 +113,9 @@ def get_gbm_best_k_features(booster, k=15, return_score=True):
 def get_logit_best_k_features(logiter, feature_names, k=15, return_score=True):
     featimp = pd.DataFrame(columns=['feature_name', 'importance'])
     featimp['feature_name'] = feature_names
-    featimp['importance'] = logiter.coef_.reshape(-1)
+    featimp['importance'] = logiter.coef_
     featimp = featimp.sort_values('importance', ascending=False)
     if return_score:
         return featimp.iloc[:k, :].values.tolist()
     else:
         return featimp.iloc[:k, 0].values.tolist()
-
-
-def plot_regression(y_pred, y_test):
-    y_pred = np.array(y_pred).reshape(-1)
-    y_test = np.array(y_test).reshape(-1)
-
-    max_value = np.max(y_test)
-
-    plt.figure(figsize=(8,7))
-    plt.scatter(y_pred, y_test, marker='o',c='',edgecolor='k')
-    plt.plot(np.arange(max_value), np.arange(max_value), 'r:')
-    plt.xlabel('Predicted Values')
-    plt.ylabel('True Values')
-    plt.xlim([0, max_value])
-    plt.ylim([0, max_value])
-
-
-
-def plot_series(y_pred, y_test, window=[0,144]):
-    assert len(window) == 2
-    y_pred = np.array(y_pred).reshape(-1).tolist()
-    y_test = np.array(y_test).reshape(-1).tolist()
-
-    plt.figure(figsize=(10, 5))
-    plt.plot(y_pred[window[0]:window[1]], label='predicted value')
-    plt.plot(y_test[window[0]:window[1]], label='true value')
-    plt.xlabel('Time')
-    plt.ylabel('Value')
-    plt.xlim([0, window[1] - window[0]])
-    plt.legend()
