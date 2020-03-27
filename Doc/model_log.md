@@ -19,11 +19,16 @@
 
 ## Feature-based method
 
-| Method |                  Model                  |  MAE  |  MAPE  |  MSPE  | Time  |
-| :----: | :-------------------------------------: | :---: | :----: | :----: | :---: |
-|  LDS   | SVD trans.+GBM regressor (all features) | 40.68 | 36.18% | 14.90% | 152.5 |
-|  LDS   | SVD trans.+MLP regressor (all features) |       |        |        |       |
-|  NLDS  | AE trans.+GBM regressor (all features)  |       |        |        |       |
-|  NLDS  | AE trans.+MLP regressor (all features)  |       |        |        |       |
+| Method |                   Model                    |  MAE  |  MAPE  |  MSPE  |  Time  |
+| :----: | :----------------------------------------: | :---: | :----: | :----: | :----: |
+|  LDS   |  SVD trans.+GBM regressor (all features)   | 40.68 | 36.18% | 14.90% | 152.5  |
+|  LDS   |  SVD trans.+MLP regressor (all features)   | 57.58 | 43.60% | 23.41% | 584.5  |
+|  NLDS  |   AE trans.+GBM regressor (all features)   | 37.47 | 31.46% | 12.09% | 1769.4 |
+|  NLDS  |   AE trans.+MLP regressor (all features)   | 36.58 | 30.14% | 11.58% | 811.7  |
+|  NLDS  | AE-MMD trans.+MLP regressor (all features) |       |        |        |        |
 
 ## Advanced method
+
+| Method |             Model             |  MAE  |  MAPE  |  MSPE  | Time  |
+| :----: | :---------------------------: | :---: | :----: | :----: | :---: |
+|   AM   | pre-trained MLP+MMD fine-tune | 40.68 | 36.18% | 14.90% | 152.5 |
