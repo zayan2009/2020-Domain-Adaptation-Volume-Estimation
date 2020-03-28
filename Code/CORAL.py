@@ -39,11 +39,11 @@ class CORAL:
         :return: Accuracy and predicted labels of target domain
         '''
         Xs_new = self.fit(Xs, Xt)
-        clf = sklearn.neighbors.KNeighborsClassifier(n_neighbors=1)
+        clf = sklearn.neighbors.KNeighborsRegressor(n_neighbors=5)
         clf.fit(Xs_new, Ys.ravel())
         y_pred = clf.predict(Xt)
-        acc = sklearn.metrics.accuracy_score(Yt, y_pred)
-        return acc, y_pred
+        # acc = sklearn.metrics.accuracy_score(Yt, y_pred)
+        return y_pred
 
 
 if __name__ == '__main__':
